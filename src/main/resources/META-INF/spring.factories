@@ -1,0 +1,2 @@
+org.springframework.boot.env.EnvironmentPostProcessor=cc.jooylife.environment.EnvironmentProcessor
+org.springframework.context.ApplicationListener=cc.jooylife.environment.EnvironmentProcessor
