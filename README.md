@@ -28,6 +28,7 @@ Add the environment variable to the configuration file, for example:
 meerkat.datasource.username=root
 meerkat.datasource.password=123456
 ```
+### 2.4. Use environment variables
 You can use it in ```application.yml``` in the springboot project like this:
 ```yaml
 spring:
