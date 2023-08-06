@@ -8,6 +8,7 @@ public class EnvHelper {
 
     /**
      * Get the config path
+     * @return the config path
      */
     public static String getConfigPath() {
         String customPath = getCustomPath();
@@ -19,6 +20,7 @@ public class EnvHelper {
 
     /**
      * Get the custom path from the system property
+     * @return the custom path
      */
     public static String getCustomPath() {
         return System.getProperty("env.config");
@@ -26,6 +28,7 @@ public class EnvHelper {
 
     /**
      * Get the default path from the system property
+     * @return the default path
      */
     public static String getDefaultPath() {
         return System.getProperty("user.home") + java.io.File.separator + ".env" + java.io.File.separator + "config.properties";

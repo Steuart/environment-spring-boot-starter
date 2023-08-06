@@ -17,6 +17,8 @@ public class EnvUtil {
 
     /**
      * Get value from properties file
+     * @return the value
+     * @param key the env key
      */
     public static String getValue(String key) {
         Properties properties = getProperties();
@@ -28,6 +30,7 @@ public class EnvUtil {
 
     /**
      * 使用单例模式获取properties对象
+     * @return properties对象
      */
     private static Properties getProperties() {
         if (properties !=null) {
