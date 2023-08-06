@@ -9,7 +9,7 @@ It is very easy to switch between different environments, such as development, t
 
 <dependency>
     <groupId>>cc.jooylife</groupId>
-    <artifactId>environment-spring-boot-starter/artifactId>
+    <artifactId>environment-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
