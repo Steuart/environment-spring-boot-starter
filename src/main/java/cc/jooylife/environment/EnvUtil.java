@@ -1,5 +1,7 @@
 package cc.jooylife.environment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -11,18 +13,13 @@ public class EnvUtil {
 
     private static volatile Properties properties;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(EnvUtil.class);
+
     /**
      * Get value from properties file
      */
     public static String getValue(String key) {
-        String configPath = EnvHelper.getConfigPath();
-        EnvHelper.info("Environment config path: " + configPath);
-        Resource resource = new FileSystemResource(configPath);
-        if (!resource.exists()) {
-            EnvHelper.info("No custom environment configuration found");
-            return null;
-        }
-        Properties properties = getProperties(resource);
+        Properties properties = getProperties();
         if (properties == null) {
             return null;
         }
@@ -32,17 +29,25 @@ public class EnvUtil {
     /**
      * 使用单例模式获取properties对象
      */
-    private static Properties getProperties(Resource resource) {
+    private static Properties getProperties() {
         if (properties !=null) {
             return properties;
         }
         synchronized (EnvUtil.class) {
-            if (properties == null) {
-                try {
-                    properties = PropertiesLoaderUtils.loadProperties(resource);
-                } catch (IOException e) {
-                    EnvHelper.error("load environment config error.", e);
-                }
+            if (properties!=null) {
+                return properties;
+            }
+            String configPath = EnvHelper.getConfigPath();
+            LOGGER.info("Environment config path: " + configPath);
+            Resource resource = new FileSystemResource(configPath);
+            if (!resource.exists()) {
+                LOGGER.info("No custom environment configuration found");
+                return null;
+            }
+            try {
+                properties = PropertiesLoaderUtils.loadProperties(resource);
+            } catch (IOException e) {
+                LOGGER.error("load environment config error.", e);
             }
         }
         return properties;
